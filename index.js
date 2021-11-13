@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
     res.send("welcome to ema-jhon")
-    console.log('Hi');
+    console.log('welcome to server.....');
 })
 
 const { MongoClient } = require('mongodb');
