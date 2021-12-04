@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const port = 3001;
+const port = 3001; 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,6 +20,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect(err => {
+    console.log('database connected')
     const products = client.db(`${process.env.DB_NAME}`).collection(`${process.env.DB_COLLECTION}`);
     const orders = client.db(`${process.env.DB_NAME}`).collection(`${process.env.DB_COLLECTION_ORDER}`);
 
@@ -37,9 +38,17 @@ client.connect(err => {
     //get all product from db....
     app.get('/products', (req, res) => {
 
-        const search = req.query.search;
+        // const search = req.query.search;
 
-        products.find({ name: { $regex: search } })
+
+        // products.find({ name: { $regex: search } })
+        //     .toArray((err, documents) => {
+        //         res.send(documents);
+        //     })
+        const search = req.query.search;
+        
+
+        products.find({})
             .toArray((err, documents) => {
                 res.send(documents);
             })
